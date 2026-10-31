@@ -16,7 +16,7 @@ const { StringValue } = require(`${A}/lib/generated`)
 async function main() {
   const name = process.env.INPUT_NAME
   const pairs = (process.env.INPUT_PAIRS || '').split(',').filter(Boolean)
-  const extractRoot = process.env.INPUT_EXTRACT_ROOT
+  const extractRoot = process.env.INPUT_EXTRACTROOT
   const workspace = process.env.GITHUB_WORKSPACE
 
   console.log(`extract root: ${extractRoot}`)
