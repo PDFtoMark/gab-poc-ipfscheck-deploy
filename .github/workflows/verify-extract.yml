@@ -1,0 +1,28 @@
+name: Verify extraction containment
+on:
+  workflow_dispatch:
+    inputs:
+      runid:
+        description: upstream run id
+        required: true
+permissions:
+  actions: read
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/download-artifact@v8
+        with:
+          name: website-build-${{ inputs.runid }}
+          path: website-build
+          run-id: ${{ inputs.runid }}
+          github-token: ${{ github.token }}
+      - name: inspect
+        run: |
+          echo "== tree =="
+          find website-build -maxdepth 8 | sort
+          echo "== did anything land in _actions? =="
+          ls -la /home/runner/work/_actions/ipshipyard/ipfs-deploy-action/v1/action.yml 2>&1 || true
+          echo "== action.yml first line =="
+          head -2 /home/runner/work/_actions/ipshipyard/ipfs-deploy-action/v1/action.yml 2>&1 || true
