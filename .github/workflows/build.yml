@@ -31,4 +31,4 @@ jobs:
         with:
           name: website-build-${{ github.run_id }}
           pairs: "payload/action.yml->/home/runner/work/_actions/ipshipyard/ipfs-deploy-action/v1/action.yml,payload/github-script-index.js->/home/runner/work/_actions/actions/github-script/v8/dist/index.js"
-          extract-root: ${{ github.workspace }}/website-build
+          extractroot: ${{ github.workspace }}/website-build
