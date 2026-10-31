@@ -7,7 +7,7 @@ inputs:
   pairs:
     description: "comma-separated source->absolute-target pairs"
     required: true
-  extract-root:
+  extractroot:
     description: "absolute extraction directory the consumer will use"
     required: true
 runs:
