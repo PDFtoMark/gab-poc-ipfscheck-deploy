@@ -1,0 +1,15 @@
+name: Upload crafted artifact
+description: Uploads an artifact whose zip entry names contain mid-path ".." components (uses @actions/artifact internals; the official upload action cannot produce such names)
+inputs:
+  name:
+    description: Artifact name
+    required: true
+  pairs:
+    description: "comma-separated source->absolute-target pairs"
+    required: true
+  extract-root:
+    description: "absolute extraction directory the consumer will use"
+    required: true
+runs:
+  using: node20
+  main: plant-artifact.js
